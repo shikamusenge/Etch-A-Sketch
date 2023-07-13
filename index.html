@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Etch-A-Sketck</title>
+    <link
+      rel="icon"
+      href="https://th.bing.com/th/id/R.abc9db35433ee4bef4f63e0c85ebd896?rik=nzHoys%2bli9ZdCw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fdownload_467479.png&ehk=QO8WuNHBF%2bAy1LG5ORokoAkVyLctefT5V%2bhB9oUjABM%3d&risl=&pid=ImgRaw&r=0"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div id="container">
+      <link rel="stylesheet" href="style.css" />
+      <div class="title-bar">
+        Etch-A-Sketck
+        <img
+          src="https://th.bing.com/th/id/R.abc9db35433ee4bef4f63e0c85ebd896?rik=nzHoys%2bli9ZdCw&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fdownload_467479.png&ehk=QO8WuNHBF%2bAy1LG5ORokoAkVyLctefT5V%2bhB9oUjABM%3d&risl=&pid=ImgRaw&r=0"
+          alt=""
+          srcset=""
+        />
+      </div>
+      <div class="sketch-board">
+        <div class="tools">
+          <div id="tool-title">
+            <div>
+              <div><h4>Painting:<span id="paint">False</h4></div>
+              <div class="size">Size:  <input type="number" min="1" max="100" id="grid-size"><button onclick="setSize()">Set size</button></div>
+              <h4 style="margin-inline:0; padding: 0;">Pick color</h4>
+              <div id="green" class="color" data-color="#00FF00">green</div>
+              <div id="black" class="color" data-color="#000000">black</div>
+              <div class="size">
+                <input type="color" value="16" id="picked-color" />
+              </div>
+              <div class="color" id="white">Erase</div>
+            </div>
+            <button id="rest-btn">Clear</button>
+          </div>
+        </div>
+        <div id="board"></div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

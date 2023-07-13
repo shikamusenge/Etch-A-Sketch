@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: antiquewhite;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.title-bar {
+  font-size: xx-large;
+}
+.title-bar img {
+  max-width: 70px;
+  max-height: 50px;
+}
+.sketch-board {
+  min-width: 95vw;
+  min-height: 80vh;
+  display: flex;
+  padding: 5vw;
+}
+#board {
+  margin-inline: 2vw;
+  background-color: white;
+  min-width: 80%;
+  border: dotted 2px gray;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: ;
+}
+.grid:hover {
+  background-color: rgba(141, 133, 133, 0.756);
+}
+.color {
+  cursor: pointer;
+  background-color: bisque;
+  margin: 4px;
+  padding: 4px;
+  border-radius: 3px;
+}

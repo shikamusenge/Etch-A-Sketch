@@ -21,17 +21,22 @@
           srcset=""
         />
       </div>
+      <div id="loader">
+        <div id="load">
+          <img src="./R.gif" alt="" srcset="">
+        </div>
+      </div>
       <div class="sketch-board">
         <div class="tools">
           <div id="tool-title">
             <div>
               <div><h4>Painting:<span id="paint">False</h4></div>
-              <div class="size">Size:  <input type="number" min="1" max="100" id="grid-size"><button onclick="setSize()">Set size</button></div>
+              <div class="size">Size(1-99):  <input type="number" min="1" max="100" id="grid-size" value="16"><button onclick="setSize()">Set size</button></div>
               <h4 style="margin-inline:0; padding: 0;">Pick color</h4>
               <div id="green" class="color" data-color="#00FF00">green</div>
               <div id="black" class="color" data-color="#000000">black</div>
               <div class="size">
-                <input type="color" value="16" id="picked-color" />
+                <input type="color" id="picked-color" />
               </div>
               <div class="color" id="white">Erase</div>
             </div>

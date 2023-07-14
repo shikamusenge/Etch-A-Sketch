@@ -7,9 +7,12 @@ pickedColor.addEventListener("change", () => {
 });
 const setSize = () => {
   const sizeInput = document.getElementById("grid-size");
+  const loader = document.getElementById("loader");
+  loader.style.display = "flex";
   const size = sizeInput.value;
-  if (size > 0 && size < 100) setGreed(size);
-  else alert("size should be greater than 0 and < 100");
+  if (size > 0 && size < 100) {
+    setGreed(size).then(() => (loader.style.display = "none"));
+  } else alert("size should be greater than 0 and < 100");
 };
 const colors = document.querySelectorAll(".color");
 colors.forEach((cl) => {
@@ -26,13 +29,19 @@ colors.forEach((cl) => {
 const write = (grid, color) => {
   grid.style.backgroundColor = `${color}`;
 };
-const setGreed = (size) => {
-  bordDiv.innerHTML = "";
-  for (j = 1; j <= size; j++) {
-    for (i = 1; i <= size; i++) {
-      bordDiv.innerHTML += "<div class='grid'></div>";
+const setGreed = async (size) => {
+  bordDiv.querySelectorAll("div").forEach((div) => {
+    div.remove();
+  });
+  const createDivisions = () => {
+    let divisions = "";
+    for (j = 1; j <= size * size; j++) {
+      divisions += "<div class='grid'></div>";
     }
-  }
+    return divisions;
+  };
+  const gridDivs = await createDivisions();
+  bordDiv.innerHTML = gridDivs;
   bordDiv.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   const grids = document.querySelectorAll(".grid");
   grids.forEach((grid) => {

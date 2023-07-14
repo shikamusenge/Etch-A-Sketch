@@ -1,10 +1,17 @@
+// variables
 const bordDiv = document.querySelector("#board");
 const pickedColor = document.getElementById("picked-color");
+const colors = document.querySelectorAll(".color");
+const resetBtn = document.querySelector("#rest-btn");
 let color = "black";
 let click = false;
-pickedColor.addEventListener("change", () => {
+
+/* functions */
+
+const changeColor = () => {
   color = pickedColor.value;
-});
+};
+
 const setSize = () => {
   const sizeInput = document.getElementById("grid-size");
   const loader = document.getElementById("loader");
@@ -14,49 +21,14 @@ const setSize = () => {
     setGreed(size).then(() => (loader.style.display = "none"));
   } else alert("size should be greater than 0 and < 100");
 };
-const colors = document.querySelectorAll(".color");
-colors.forEach((cl) => {
-  cl.onclick = () => {
-    color = cl.id;
-    pickedColor.value = cl.dataset.color;
-    colors.forEach((colorbox) => {
-      cl.style.boxShadow = ``;
-    });
-    cl.style.boxShadow = ` 2px 2px 2px grey`;
-  };
-  cl.style.border = `solid 2px ${cl.id}`;
-});
+
 const write = (grid, color) => {
   grid.style.backgroundColor = `${color}`;
 };
-const setGreed = async (size) => {
-  bordDiv.querySelectorAll("div").forEach((div) => {
-    div.remove();
-  });
-  const createDivisions = () => {
-    let divisions = "";
-    for (j = 1; j <= size * size; j++) {
-      divisions += "<div class='grid'></div>";
-    }
-    return divisions;
-  };
-  const gridDivs = await createDivisions();
-  bordDiv.innerHTML = gridDivs;
-  bordDiv.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-  const grids = document.querySelectorAll(".grid");
-  grids.forEach((grid) => {
-    grid.onmouseover = () => {
-      if (click) write(grid, color);
-    };
-  });
-};
-setGreed(16);
-document.onclick = () => {
+
+const documentClick = () => {
   click = !click;
   document.querySelector("#paint").innerHTML = `${click}`;
-};
-document.querySelector("#rest-btn").onclick = () => {
-  restDiagram();
 };
 
 function restDiagram() {
@@ -65,3 +37,46 @@ function restDiagram() {
     write(grid, "white");
   });
 }
+
+const colorSelect = () => {
+  color = cl.id;
+  pickedColor.value = cl.dataset.color;
+  colors.forEach((colorbox) => {
+    cl.style.boxShadow = ``;
+  });
+  cl.style.boxShadow = ` 2px 2px 2px grey`;
+};
+
+/* end of functions */
+
+/* event listeners */
+
+pickedColor.addEventListener("change", changeColor);
+document.addEventListener("click", documentClick);
+resetBtn.addEventListener("click", restDiagram);
+
+/* end of event listeners */
+
+colors.forEach((cl) => {
+  cl.onclick = () => {
+    color = cl.id;
+    pickedColor.value = cl.dataset.color;
+    cl.style.boxShadow = ` 2px 2px 2px grey`;
+  };
+  cl.style.border = `solid 2px ${cl.id}`;
+});
+
+const setGreed = (size) => {
+  bordDiv.innerHTML = "";
+  for (i = 0; i < size ** 2; i++) {
+    const boardItem = document.createElement("div");
+    boardItem.classList.add("grid");
+    boardItem.addEventListener("mouseover", () => {
+      if (click) write(boardItem, color);
+    });
+    bordDiv.appendChild(boardItem);
+  }
+  bordDiv.style.setProperty("--size", size);
+};
+
+setGreed(16);
